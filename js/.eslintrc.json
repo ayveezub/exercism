@@ -1,0 +1,18 @@
+{
+  "env": {
+    "browser": true
+  },
+  "extends": [
+    "eslint:recommended"
+  ],
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "sourceType": "module"
+  },
+  "rules": {
+    "semi": [1, "never"],
+    "indent": ["error", 2],
+    "object-curly-spacing": ["error", "always"],
+    "quotes": ["error", "single", {"avoidEscape": true}]
+  }
+}
