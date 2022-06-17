@@ -31,13 +31,7 @@ For example, for the phrase `"That's the password: 'PASSWORD 123'!", cried the S
 */
 
 export const countWords = phrase => {
-  const words = phrase.toLowerCase().replace(/[^a-z0-9\s']/g, ' ').split(/\s+/).map(currentWord => {
-    let word = currentWord
-
-    if (word.charAt() === `'`) word = word.slice(1)
-    if (word.charAt(word.length - 1) === `'`) word = word.slice(0, -1)
-    return word
-  }).filter(currentWord => currentWord !== (undefined || ''))
+  const words = phrase.toLowerCase().match(/\w+('\w+)?/g)
 
   return Object.fromEntries(words.reduce((acc, currentWord) => (
     acc.concat([[currentWord, words.filter(countedWord => countedWord === currentWord).length]])
