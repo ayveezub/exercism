@@ -1,0 +1,42 @@
+#=
+
+Given a string of digits, calculate the largest product for a contiguous substring of digits of length n.
+
+For example, for the input "1027839564", the largest product for a series of 3 digits is 270 (9 * 5 * 6), and the largest product for a series of 5 digits is 7560 (7 * 8 * 3 * 9 * 5).
+
+Note that these series are only required to occupy adjacent positions in the input; the digits need not be numerically consecutive.
+
+For the input "73167176531330624919225119674426574742355349194934", the largest product for a series of 6 digits is 23520.
+
+For a series of zero digits, you need to return the empty product (the result of multiplying no numbers), which is 1.
+
+
+Advanced:
+
+You do not need to understand why the empty product is 1 to solve this problem, but in case you are interested, here is an informal argument: if we split a list of numbers A into two new lists B and C, then we expect product(A) == product(B) * product(C) because we don't expect the order that you multiply things to matter; now if we split a list containing only the number 3 into the empty list and a list containing the number 3 then the product of the empty list has to be 1 for product([3]) == product([]) * product([3]) to be true.
+
+The same kind of argument justifies why the sum of no numbers is 0.
+
+=#
+
+function largest_product(str::String, span::Int)::Int
+  if span == 0
+      return 1
+  end
+  
+  if span < 0 || span > length(str)
+      throw(ArgumentError("Invalid window size"))
+  end
+  
+  # Convert the input string to an array of integers
+  int_str = map(x -> parse(Int, x), collect(str))
+  
+  # Generate all sliding windows of the specified size
+  windows = [int_str[i:i+span-1] for i in 1:length(int_str)-span+1]
+  
+  # Calculate the product of each window
+  products = map(window -> reduce(*, window), windows)
+  
+  # Return the maximum product
+  return maximum(products)
+end
