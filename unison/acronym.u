@@ -1,0 +1,19 @@
+-- Convert the input `Text` to a list of characters using `toCharList`
+--
+-- Split the list of characters into substrings based on whitespace, hyphens
+-- and underscores using `split (flip elem [?\s, ?-, ?_])`
+--
+-- Keep only the first character of each substring using `filterMap head`
+--
+-- Convert all characters to uppercase using `map toUpper`
+--
+-- Convert the list of characters back to a `Text` type using `fromCharList`
+
+
+acronym.abbreviate : Text -> Text
+acronym.abbreviate =   
+  toCharList
+    >> split (flip elem [?\s, ?-, ?_])
+    >> filterMap head
+    >> map toUpper
+    >> fromCharList

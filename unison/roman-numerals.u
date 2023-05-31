@@ -1,0 +1,22 @@
+use List +:
+
+romanNumerals.toRomanAcc : [Text] -> Nat -> Text
+romanNumerals.toRomanAcc acc decimal = match decimal with
+  x
+    | x >= 1000 -> toRomanAcc ("M" +: acc) (x - 1000)
+    | x >= 900 -> toRomanAcc ("CM" +: acc) (x - 900)
+    | x >= 500 -> toRomanAcc ("D" +: acc) (x - 500)
+    | x >= 400 -> toRomanAcc ("CD" +: acc) (x - 400)
+    | x >= 100 -> toRomanAcc ("C" +: acc) (x - 100)
+    | x >= 90 -> toRomanAcc ("XC" +: acc) (x - 90)
+    | x >= 50 -> toRomanAcc ("L" +: acc) (x - 50)
+    | x >= 40 -> toRomanAcc ("XL" +: acc) (x - 40)
+    | x >= 10 -> toRomanAcc ("X" +: acc) (x - 10)
+    | x >= 9 -> toRomanAcc ("IX" +: acc) (x - 9)
+    | x >= 5 -> toRomanAcc ("V" +: acc) (x - 5)
+    | x >= 4 -> toRomanAcc ("IV" +: acc) (x - 4)
+    | x >= 1 -> toRomanAcc ("I" +: acc) (x - 1)
+  _ -> join "" (reverse acc)
+
+romanNumerals.toRoman : Nat -> Text
+romanNumerals.toRoman = toRomanAcc []

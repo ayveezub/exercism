@@ -1,0 +1,6 @@
+isogram.isIsogram : Text -> Boolean
+isogram.isIsogram text =
+  let
+    bag = Text.toLowercase text |> Text.toBag |> Bag.removeAll ?- |> Bag.removeAll ?\s
+
+    Bag.toSet bag |> Set.size == Bag.size bag

@@ -1,0 +1,12 @@
+raindrops.factorize : Nat -> [Text]
+raindrops.factorize = cases
+  n | mod n 3 == 0 ->  factorize (n / 3) :+ "Pling"
+  n | mod n 5 == 0 ->  factorize (n / 5) :+ "Plang"
+  n | mod n 7 == 0 ->  factorize (n / 7) :+ "Plong"
+  n -> []
+
+raindrops.convert : Nat -> Text
+raindrops.convert n =
+  sounds = factorize n |> distinct |> reverse
+
+  if List.isEmpty sounds then Nat.toText n else Text.join "" sounds

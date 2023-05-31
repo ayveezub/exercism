@@ -1,0 +1,18 @@
+spaceAge.age : Text -> Nat -> Optional Float
+spaceAge.age planet earthAgeSeconds =
+  let
+    orbitalPeriod = match planet with
+      "Earth" -> Some 1.0
+      "Venus" -> Some 0.61519726
+      "Mars" -> Some 1.8808158
+      "Jupiter" -> Some 11.862615
+      "Saturn" -> Some 29.447498
+      "Uranus" -> Some 84.016846
+      "Neptune" -> Some 164.79132
+      "Mercury" -> Some 0.2408467
+      _ -> None
+
+    seconds = toFloat earthAgeSeconds
+    yearsOnPlanet = seconds / 31557600.0
+
+    map (x -> yearsOnPlanet / x) orbitalPeriod
